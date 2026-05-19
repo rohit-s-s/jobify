@@ -1,0 +1,8 @@
+//Logic for implementing dark theme through the page
+const checkDefaultTheme = ()=>{
+  const isDarkTheme = localStorage.getItem("darkTheme") === "true";
+  document.body.classList.toggle("dark-theme",isDarkTheme)
+  return isDarkTheme
+}
+
+export default checkDefaultTheme
