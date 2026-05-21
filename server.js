@@ -20,17 +20,13 @@ const app = express();
 const PORT = process.env.PORT || 5100;
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-app.use(express.static(path.resolve(__dirname, "./public")));
+app.use(express.static(path.resolve(__dirname, "./Client/dist" )));
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 app.use(cookieParser());
 app.use(express.json());
-
-app.get("/", (req, res) => {
-  res.send("Hello World");
-});
 
 app.get("/api/v1/test", (req, res) => {
   res.json({ message: "test message" });
@@ -46,7 +42,7 @@ app.use("/api/v1/users", authenticateUser, userRouter);
 app.use("/api/v1/auth", authRouter);
 
 app.get("*",(req,res)=>{
-  res.sendFile(path.resolve(__dirname,"./public","index.html"))
+  res.sendFile(path.resolve(__dirname,"Client/dist","index.html"))
 })
 
 // NOT FOUND

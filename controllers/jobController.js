@@ -28,8 +28,8 @@ export const getAllJobs = async (req, res) => {
   const sortOptions = {
     newest: "-createdAt",
     oldest: "creaetedAt",
-    "a-z": "position",
-    "z-a": "-position",
+    ascending: "position",
+    descending: "-position",
   };
 
   const sortKey = sortOptions[sort] || sortOptions.newest;

@@ -1,10 +1,12 @@
 import React from "react";
-import { Outlet} from "react-router-dom";
+import { Outlet, useNavigation} from "react-router-dom";
 import Wrapper from "../assets/wrappers/Dashboard";
-import { BigSidebar, Navbar, SmallSidebar } from "../components";
+import { BigSidebar, Loading, Navbar, SmallSidebar } from "../components";
 import { DashboardProvider } from "../provider/DashboardProvider";
 
 const DashboardLayout = () => {
+  const navigation = useNavigation()
+  const isPageLoading = navigation.state === "loading"
 
   return (
     <DashboardProvider>
@@ -15,7 +17,7 @@ const DashboardLayout = () => {
           <div>
             <Navbar />
             <div className="dashboard-page">
-              <Outlet />
+              {isPageLoading?<Loading/>:<Outlet/>}
             </div>
           </div>
         </main>
