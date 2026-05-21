@@ -1,4 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import {
   HomeLayout,
   Register,
@@ -15,7 +17,13 @@ import {
 } from "./pages";
 import checkDefaultTheme from "./utils/checkDefaultTheme";
 
-import { allJobsLoader, editJobLoader, dashboardLoader, adminLoader, statsLoader } from "./utils/loader";
+import {
+  allJobsLoader,
+  editJobLoader,
+  dashboardLoader,
+  adminLoader,
+ // statsLoader,
+} from "./utils/loader";
 
 import {
   addJobAction,
@@ -27,6 +35,8 @@ import {
 import { action as deleteJobAction } from "./pages/DeleteJob";
 
 checkDefaultTheme();
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -67,7 +77,7 @@ const router = createBrowserRouter([
           {
             path: "stats",
             element: <Stats />,
-            loader:statsLoader
+            //loader: statsLoader,
           },
           {
             path: "profile",
@@ -77,7 +87,7 @@ const router = createBrowserRouter([
           {
             path: "admin",
             element: <Admin />,
-            loader:adminLoader
+            loader: adminLoader,
           },
           {
             path: "edit-job/:id",
@@ -96,7 +106,12 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
+  );
 };
 
 export default App;
