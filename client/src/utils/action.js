@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import customFetch from "../utils/customFetch";
+import customFetch from "./customFetch";
 import { redirect } from "react-router-dom";
 
 export const profileAction = async ({ request }) => {
